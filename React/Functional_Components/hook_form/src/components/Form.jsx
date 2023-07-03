@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "../App.css"
 
 const Form = (props) => {
@@ -21,7 +21,6 @@ const Form = (props) => {
         setEmail("");
         setPassword("");
         setConfirm("");
-        return newUser;
     };
 
     const handleFirstName = (e) => {
@@ -133,7 +132,11 @@ const Form = (props) => {
                         }
                     </div>
                 </div>
-                <button type="submit">Create User</button>
+                {
+                    (firstNameErrors || lastNameErrors || emailErrors || passwordErrors || confirmErrors) || !(firstName && lastName && email && password && confirm) ?
+                    <button type="submit" disabled>Create User</button> :
+                    <button type="submit">Create User</button>
+                }
             </form>
             <h2>Your Form Data:</h2>
             <div className="form-info">
