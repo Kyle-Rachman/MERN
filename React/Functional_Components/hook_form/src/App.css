@@ -1,0 +1,22 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.userForm {
+  margin-bottom: 20px;
+}
+
+.formElement {
+  text-align: left;
+}
+
+.userForm > button {
+  margin: 20px;
+}
+
+.form-info {
+  text-align: left;
+}
