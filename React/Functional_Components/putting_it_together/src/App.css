@@ -4,6 +4,15 @@
   padding: 2rem;
 }
 
-.PersonCard{
+.PersonCard {
   border-bottom: 1px solid white;
+}
+
+.PersonCard > button {
+  border-radius: 5px;
+  padding: 2px 5px;
+  margin-bottom: 10px;
+  box-shadow: 2px 2px black;
+  background-color: gray;
+  color: white;
 }
