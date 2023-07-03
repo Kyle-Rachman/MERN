@@ -20,3 +20,15 @@
 .form-info {
   text-align: left;
 }
+
+.errors {
+  background-color: lightcoral;
+  color: darkred;
+  font-weight: bolder;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.errors p {
+  margin: 5px;
+}

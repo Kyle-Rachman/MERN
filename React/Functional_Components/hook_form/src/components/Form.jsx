@@ -3,10 +3,15 @@ import "../App.css"
 
 const Form = (props) => {
     const [firstName, setFirstName] = useState("");
+    const [firstNameErrors, setFirstNameErrors] = useState("");
     const [lastName, setLastName] = useState("");
+    const [lastNameErrors, setLastNameErrors] = useState("");
     const [email, setEmail] = useState("");
+    const [emailErrors, setEmailErrors] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordErrors, setPasswordErrors] = useState("");
     const [confirm, setConfirm] = useState("");
+    const [confirmErrors, setConfirmErrors] = useState("");
 
     const createUser = (e) => {
         e.preventDefault();
@@ -19,28 +24,114 @@ const Form = (props) => {
         return newUser;
     };
 
+    const handleFirstName = (e) => {
+        setFirstName(e.target.value);
+        if (e.target.value.length < 3) {
+            setFirstNameErrors("First name must be at least three characters!")
+        }
+        else {
+            setFirstNameErrors("")
+        }
+    };
+
+    const handleLastName = (e) => {
+        setLastName(e.target.value);
+        if (e.target.value.length < 3) {
+            setLastNameErrors("Last name must be at least three characters!")
+        }
+        else {
+            setLastNameErrors("")
+        }
+    };
+
+    const handleEmail = (e) => {
+        setEmail(e.target.value);
+        if (e.target.value.length < 5) {
+            setEmailErrors("Email must be at least five characters!")
+        }
+        else {
+            setEmailErrors("")
+        }
+    };
+
+    const handlePassword = (e) => {
+        setPassword(e.target.value);
+        if (e.target.value.length < 8) {
+            setPasswordErrors("Password must be at least eight characters!")
+        }
+        else {
+            setPasswordErrors("")
+        }
+    };
+
+    const handleConfirm = (e) => {
+        setConfirm(e.target.value);
+        if (password != e.target.value) {
+            setConfirmErrors("Passwords do not match!")
+        }
+        else {
+            setConfirmErrors("")
+        }
+    };
+
     return(
         <div className="container">
+            <h1>Create a User!</h1>
             <form onSubmit={ createUser } className='userForm'>
                 <div className='formElement'>
                     <label htmlFor="firstName" className="form-label">First Name:</label>
-                    <input type="text" className="form-control" id="firstName" value={firstName} onChange={ (e) => setFirstName(e.target.value) }/>
+                    <input type="text" className="form-control" id="firstName" value={firstName} onChange={ handleFirstName }/>
+                    <div className="errors">
+                        {
+                            firstNameErrors ?
+                            <p>{firstNameErrors}</p> :
+                            ""
+                        }
+                    </div>
                 </div>
                 <div className='formElement'>
                     <label htmlFor="lastName" className="form-label">Last Name:</label>
-                    <input type="text" className="form-control" id="lastName" value={lastName} onChange={ (e) => setLastName(e.target.value) }/>
+                    <input type="text" className="form-control" id="lastName" value={lastName} onChange={ handleLastName }/>
+                    <div className="errors">
+                        {
+                            lastNameErrors ?
+                            <p>{lastNameErrors}</p> :
+                            ""
+                        }
+                    </div>
                 </div>
                 <div className='formElement'>
                     <label htmlFor="email" className="form-label">Email:</label>
-                    <input type="email" className="form-control" id="email" value={email} onChange={ (e) => setEmail(e.target.value) }/>
+                    <input type="email" className="form-control" id="email" value={email} onChange={ handleEmail }/>
+                    <div className="errors">
+                        {
+                            emailErrors ?
+                            <p>{emailErrors}</p> :
+                            ""
+                        }
+                    </div>
                 </div>
                 <div className='formElement'>
                     <label htmlFor="password" className="form-label">Password:</label>
-                    <input type="password" className="form-control" id="password" value={password} onChange={ (e) => setPassword(e.target.value) }/>
+                    <input type="password" className="form-control" id="password" value={password} onChange={ handlePassword }/>
+                    <div className="errors">
+                        {
+                            passwordErrors ?
+                            <p>{passwordErrors}</p> :
+                            ""
+                        }
+                    </div>
                 </div>
                 <div className='formElement'>
                     <label htmlFor="confirm" className="form-label">Confirm:</label>
-                    <input type="password" className="form-control" id="confirm" value={confirm} onChange={ (e) => setConfirm(e.target.value) }/>
+                    <input type="password" className="form-control" id="confirm" value={confirm} onChange={ handleConfirm }/>
+                    <div className="errors">
+                        {
+                            confirmErrors ?
+                            <p>{confirmErrors}</p> :
+                            ""
+                        }
+                    </div>
                 </div>
                 <button type="submit">Create User</button>
             </form>
