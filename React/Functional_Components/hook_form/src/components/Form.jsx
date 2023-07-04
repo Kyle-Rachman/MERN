@@ -133,6 +133,7 @@ const Form = (props) => {
                     </div>
                 </div>
                 {
+                    // Checks to see if any errors are present and if all fields are filled in
                     (firstNameErrors || lastNameErrors || emailErrors || passwordErrors || confirmErrors) || !(firstName && lastName && email && password && confirm) ?
                     <button type="submit" disabled>Create User</button> :
                     <button type="submit">Create User</button>
