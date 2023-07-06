@@ -6,6 +6,7 @@ import MakeTodo from './components/MakeTodo';
 function App() {
   if (localStorage.getItem("todos")) {
     var startingTodos = JSON.parse(localStorage.getItem("todos"));
+    console.log(startingTodos)
   } else {
     var startingTodos = [];
   };

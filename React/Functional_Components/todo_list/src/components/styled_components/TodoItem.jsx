@@ -8,6 +8,7 @@ const TodoItem= styled.div`
     width: 300px;
     margin: 0 auto;
     margin-bottom: 10px;
+    text-align: left;
 `;
 
 export default TodoItem
