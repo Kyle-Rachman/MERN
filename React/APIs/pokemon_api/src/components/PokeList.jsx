@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const PokeList = (props) => {
 
@@ -7,12 +8,10 @@ const PokeList = (props) => {
 
     useEffect( () => {
         const getPokemonNames = async () => {
-            let response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=100000");
-            let data = await response.json();
-            return setNames(data.results.map( (pokemon) => <li>{capitalizeFirstLetter(pokemon['name'])}</li>));
+            let response = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=100000");
+            return setNames(response.data.results.map( (pokemon) => <li key={pokemon['url']}>{capitalizeFirstLetter(pokemon['name'])}</li>));
         };
-        getPokemonNames()
-        .catch(console.error);
+        getPokemonNames().catch((err) => console.error(err));
     }, []);
     return (
         <div>
