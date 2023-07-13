@@ -20,7 +20,7 @@ const DisplayItem = (props) => {
                 };
                 setHomeworld(homeworldData)
             };
-        return setData(response.data);
+            return setData(response.data);
         };
         fetchData().catch(() => navigate("/error"))
     }, [type,id]);
