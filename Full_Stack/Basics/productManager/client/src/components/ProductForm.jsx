@@ -16,7 +16,13 @@ const ProductForm = (props) => {
         })
             .then(res => {
                 if (res.data.errors) {
-                    setErrors(res.data.message);
+                    let errorString = ""
+                    for (var key in res.data.errors) {
+                        errorString += " " + JSON.stringify(res.data.errors[key].message).replace(/['"]+/g, '')
+                    }
+                    setErrors(errorString)
+                } else if (typeof res.data == "string") {
+                    setErrors("This product already exists!")
                 } else {
                     setErrors("");
                 };

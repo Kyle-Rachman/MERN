@@ -4,9 +4,7 @@ const Product = require('../models/product.model');
 
 const createProduct = (req, res) => {
     Product.exists({
-        title: req.body.title,
-        price: req.body.price,
-        description: req.body.description
+        title: req.body.title
     })
     .then( productExists => {
         if (productExists) {
@@ -23,7 +21,7 @@ const createProduct = (req, res) => {
 const findAllProducts = (req, res) => {
     Product.find()
         .then((allProducts) => {
-            res.json({ products: allProducts })
+            res.json(allProducts)
         })
         .catch((err) => res.json(err));
 };

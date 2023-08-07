@@ -1,15 +1,14 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import ProductForm from './components/ProductForm';
+import Main from './views/Main';
 
 function App() {
   return (
     <>
-      <ProductForm />
       <BrowserRouter>
         <Routes>
-          <Route exact path='/products' element={<></>}></Route>
+          <Route exact path='/products' element={<Main />}></Route>
         </Routes>
       </BrowserRouter>
     </>
