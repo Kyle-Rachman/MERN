@@ -17,7 +17,8 @@ const ProductList = (props) => {
             {
                 product.map((product, index) => {
                     return (
-                        <p key = {index}><Link to={`/products/${product._id}`}>{product.title}</Link></p>
+                        <p key = {index}><Link to={`/products/${product._id}`}>{product.title}</Link>
+                        <Link to={`/products/edit/${product._id}`}>    Edit</Link></p>
                     );
                 })
             }
