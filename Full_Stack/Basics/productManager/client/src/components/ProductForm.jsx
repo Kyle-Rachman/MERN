@@ -6,6 +6,7 @@ const ProductForm = (props) => {
     const [price, setPrice] = useState("");
     const [description, setDescription] = useState("");
     const [errors, setErrors] = useState("");
+    const {product, setProduct} = props;
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -25,6 +26,7 @@ const ProductForm = (props) => {
                     setErrors("This product already exists!")
                 } else {
                     setErrors("");
+                    setProduct([...product, res.data])
                 };
             })
             .catch(err => console.log(err));
@@ -41,7 +43,7 @@ const ProductForm = (props) => {
                     <input type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)}/>
                 </div>
                 <div className="form-element">
-                    <label htmlFor="price">Price:</label>
+                    <label htmlFor="price">Price (in $):</label>
                     <input type="number" id="price" step="0.01" value={price} onChange={(e) => setPrice(e.target.value)}/>
                 </div>
                 <div className="form-element">

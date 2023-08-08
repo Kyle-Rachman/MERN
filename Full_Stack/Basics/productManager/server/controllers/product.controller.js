@@ -34,7 +34,7 @@ const findProduct = (req, res) => {
         }
         return Promise.reject('This product does not exist!');
     })
-    .then(saveResult => res.json({ product: saveResult}))
+    .then(saveResult => res.json(saveResult))
     .catch((err) => res.json(err));
 };
 
@@ -50,7 +50,7 @@ const updateExistingProduct = (req, res) => {
         }
         return Promise.reject('This product does not exist!');
     })
-    .then(saveResult => res.json({ updatedProduct: saveResult}))
+    .then(saveResult => res.json(saveResult))
     .catch((err) => res.json(err));
 };
 
@@ -59,7 +59,7 @@ const updateExistingProduct = (req, res) => {
 const deleteProduct = (req, res) => {
     Product.deleteOne({ _id: req.params.id })
         .then((result) => {
-            req.json({ result: result})
+            req.json(result)
         })
         .catch((err) => res.json(err));
 };
