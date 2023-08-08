@@ -3,14 +3,16 @@ import ProductForm from '../components/ProductForm';
 import ProductList from '../components/ProductList';
 
 const Home = (props) => {
-    const [product, setProduct] = useState([]);
-
+    const [products, setProducts] = useState([]);
+    const removeFromDOM = productId => {
+        setProducts(products.filter(product => product._id != productId));
+    }
     return (
         <>
             <h2>Product Manager</h2>
-            <ProductForm product={product} setProduct={setProduct}/>
+            <ProductForm products={products} setProducts={setProducts}/>
             <hr/>
-            <ProductList product={product} setProduct={setProduct}/>
+            <ProductList products={products} setProducts={setProducts} removeFromDOM={removeFromDOM}/>
         </>
     );
 };
