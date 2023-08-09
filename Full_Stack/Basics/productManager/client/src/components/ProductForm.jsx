@@ -1,35 +1,14 @@
 import React, { useState } from "react";
-import axios from "axios";
 
 const ProductForm = (props) => {
-    const [title, setTitle] = useState("");
-    const [price, setPrice] = useState("");
-    const [description, setDescription] = useState("");
-    const [errors, setErrors] = useState("");
-    const {products, setProducts} = props;
+    const {initialTitle, initialPrice, initialDescription, onSubmitProp} = props;
+    const [title, setTitle] = useState(initialTitle);
+    const [price, setPrice] = useState(initialPrice);
+    const [description, setDescription] = useState(initialDescription);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8000/api/products/new', {
-            title,
-            price,
-            description
-        })
-            .then(res => {
-                if (res.data.errors) {
-                    let errorString = ""
-                    for (var key in res.data.errors) {
-                        errorString += " " + JSON.stringify(res.data.errors[key].message).replace(/['"]+/g, '')
-                    }
-                    setErrors(errorString)
-                } else if (typeof res.data == "string") {
-                    setErrors("This product already exists!")
-                } else {
-                    setErrors("");
-                    setProducts([...products, res.data])
-                };
-            })
-            .catch(err => console.log(err));
+        onSubmitProp({title, price, description});
         setTitle("");
         setPrice("");
         setDescription("");
@@ -50,11 +29,8 @@ const ProductForm = (props) => {
                     <label htmlFor="description">Description: </label>
                     <input type="text" id="description" value={description} onChange={(e) => setDescription(e.target.value)}/>
                 </div>
-                <button type="submit">Create</button>
+                <button type="submit">Submit</button>
             </form>
-            <div className="errors">
-                <p>{errors}</p>
-            </div>
         </>
     );
 };
