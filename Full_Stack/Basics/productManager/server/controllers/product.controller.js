@@ -13,7 +13,7 @@ const createProduct = (req, res) => {
         return Product.create(req.body);
     })
     .then(saveResult => res.json(saveResult))
-    .catch((err) => res.json(err));
+    .catch((err) => res.status(400).json(err));
 };
 
 // Read Commands for Product
@@ -23,7 +23,7 @@ const findAllProducts = (req, res) => {
         .then((allProducts) => {
             res.json(allProducts)
         })
-        .catch((err) => res.json(err));
+        .catch((err) => res.status(400).json(err));
 };
 
 const findProduct = (req, res) => {
@@ -35,7 +35,7 @@ const findProduct = (req, res) => {
         return Promise.reject('This product does not exist!');
     })
     .then(saveResult => res.json(saveResult))
-    .catch((err) => res.json(err));
+    .catch((err) => res.status(400).json(err));
 };
 
 // Update Commands for Product
@@ -51,7 +51,7 @@ const updateExistingProduct = (req, res) => {
         return Promise.reject('This product does not exist!');
     })
     .then(saveResult => res.json(saveResult))
-    .catch((err) => res.json(err));
+    .catch((err) => res.status(400).json(err));
 };
 
 // Delete Commands for Product
@@ -59,9 +59,9 @@ const updateExistingProduct = (req, res) => {
 const deleteProduct = (req, res) => {
     Product.deleteOne({ _id: req.params.id })
         .then((result) => {
-            req.json(result)
+            res.json(result)
         })
-        .catch((err) => res.json(err));
+        .catch((err) => res.status(400).json(err));
 };
 
 module.exports = {

@@ -8,7 +8,7 @@ const UpdateProduct = (props) => {
     const {id} = useParams();
     const [product, setProduct] = useState({});
     const [loaded, setLoaded] = useState(false);
-    const [errors, setErrors] = useState("");
+    const [errors, setErrors] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -18,23 +18,19 @@ const UpdateProduct = (props) => {
                 setLoaded(true);
             })
             .catch(err => console.log(err));
-    },[loaded])
+    })
 
     const updateProduct = productParam => {
         axios.patch('http://localhost:8000/api/products/' + id, productParam)
-            .then(res => {
-                if (res.data.errors) {
-                    let errorString = ""
-                    for (var key in res.data.errors) {
-                        errorString += " " + JSON.stringify(res.data.errors[key].message).replace(/['"]+/g, '')
+            .then(res => navigate("/products"))
+            .catch(err => {
+                let errorArr = []
+                    for (var key in err.response.data.errors) {
+                        errorArr.push(err.response.data.errors[key].message);
                     }
-                    setErrors(errorString)
-                    setLoaded(false)
-                } else {
-                    navigate("/products");
-                };
-            })
-            .catch(err => console.log(err));
+                    setErrors(errorArr);
+                    setLoaded(false);
+            });
     };
 
     return (

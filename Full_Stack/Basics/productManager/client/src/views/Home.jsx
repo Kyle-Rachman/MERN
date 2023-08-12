@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const Home = (props) => {
     const [products, setProducts] = useState([]);
-    const [errors, setErrors] = useState("");
+    const [errors, setErrors] = useState([]);
     useEffect(() => {
         axios.get('http://localhost:8000/api/products')
             .then((res) => setProducts(res.data))
@@ -14,20 +14,20 @@ const Home = (props) => {
     const createProduct = productParam => {
         axios.post('http://localhost:8000/api/products/new', productParam)
             .then(res => {
-                if (res.data.errors) {
-                    let errorString = ""
-                    for (var key in res.data.errors) {
-                        errorString += " " + JSON.stringify(res.data.errors[key].message).replace(/['"]+/g, '')
-                    }
-                    setErrors(errorString)
-                } else if (typeof res.data == "string") {
-                    setErrors("This product already exists!")
-                } else {
-                    setErrors("");
-                    setProducts([...products, res.data])
-                };
+                    setErrors([]);
+                    setProducts([...products, res.data]);
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                if (typeof err.response.data == "string") {
+                    setErrors(["This product already exists!"]);
+                } else{
+                    let errorArr = []
+                    for (var key in err.response.data.errors) {
+                        errorArr.push(err.response.data.errors[key].message);
+                    }
+                    setErrors(errorArr);
+                };
+            });
     }
     const removeFromDOM = productId => {
         axios.delete('http://localhost:8000/api/products/' + productId)
@@ -39,7 +39,9 @@ const Home = (props) => {
             <h2>Product Manager</h2>
             <ProductForm onSubmitProp={createProduct} initialTitle="" initialPrice="" initialDescription=""/>
             <div className="errors">
-                <p>{errors}</p>
+                {errors.map((err, index) => (
+                        <p key={index}>{err}</p>
+                    ))}
             </div>
             <hr/>
             <ProductList products={products} removeFromDOM={removeFromDOM}/>
