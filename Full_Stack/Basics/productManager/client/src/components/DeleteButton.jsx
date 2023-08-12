@@ -1,5 +1,10 @@
 import React from "react";
 import axios from "axios";
+import Button from "@mui/material/Button";
+
+const MarginButtonStyle = {
+    margin: "10px 10px"
+};
 
 const DeleteButton = (props) => {
     const {productId, successCallback} = props;
@@ -9,7 +14,7 @@ const DeleteButton = (props) => {
             .catch(err => console.log(err));
     };
     return (
-        <button onClick={deleteProduct}>Delete</button>
+        <Button onClick={deleteProduct} style={MarginButtonStyle} variant="outlined">Delete</Button>
     );
 };
 

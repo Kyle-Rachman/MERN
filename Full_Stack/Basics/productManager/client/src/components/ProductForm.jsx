@@ -1,4 +1,13 @@
 import React, { useState } from "react";
+import { Button, FormControl, Input, InputLabel} from "@mui/material";
+
+const whiteTextStyle = {
+    color: 'white'
+};
+const whiteFormStyle = {
+    borderBottom: '1px solid white',
+    margin: '0px 20px'
+};
 
 const ProductForm = (props) => {
     const {initialTitle, initialPrice, initialDescription, onSubmitProp} = props;
@@ -17,19 +26,21 @@ const ProductForm = (props) => {
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <div className="form-element">
-                    <label htmlFor="title">Title: </label>
-                    <input type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)}/>
+                <div>
+                    <FormControl style={whiteFormStyle}>
+                        <InputLabel htmlFor="title" style={whiteTextStyle}>Title: </InputLabel>
+                        <Input type="text" id="title" value={title} style={whiteTextStyle} onChange={(e) => setTitle(e.target.value)}/>
+                    </FormControl>
+                    <FormControl style={whiteFormStyle}>
+                        <InputLabel htmlFor="price" style={whiteTextStyle}>Price (in $): </InputLabel>
+                        <Input type="number" id="price" step="0.01" value={price} style={whiteTextStyle} onChange={(e) => setPrice(e.target.value)}/>
+                    </FormControl>
+                    <FormControl style={whiteFormStyle}>
+                        <InputLabel htmlFor="description" style={whiteTextStyle}>Description: </InputLabel>
+                        <Input type="text" id="description" value={description} style={whiteTextStyle} onChange={(e) => setDescription(e.target.value)}/>
+                    </FormControl>
                 </div>
-                <div className="form-element">
-                    <label htmlFor="price">Price (in $): </label>
-                    <input type="number" id="price" step="0.01" value={price} onChange={(e) => setPrice(e.target.value)}/>
-                </div>
-                <div className="form-element">
-                    <label htmlFor="description">Description: </label>
-                    <input type="text" id="description" value={description} onChange={(e) => setDescription(e.target.value)}/>
-                </div>
-                <button type="submit">Submit</button>
+                <Button variant="outlined" style={{margin: '10px 0px'}} type="submit">Submit</Button>
             </form>
         </>
     );

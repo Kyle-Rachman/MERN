@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import ProductForm from "./ProductForm";
 import DeleteButton from "./DeleteButton";
+import Button from "@mui/material/Button";
 
 const UpdateProduct = (props) => {
     const {id} = useParams();
@@ -42,11 +43,13 @@ const UpdateProduct = (props) => {
                 />
             }
             <div className="errors">
-                <p>{errors}</p>
+                {errors.map((err, index) => (
+                        <p key={index}>{err}</p>
+                    ))}
             </div>
             <DeleteButton productId={product._id} successCallback={() => navigate("/products")}/>
             <br/>
-            <Link to='/products'>Back</Link>
+            <Button component={Link} to='/products'>Back</Button>
         </>
     );
 };
