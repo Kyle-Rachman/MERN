@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 30px;
+}
+
+.content {
+    border: 2px solid black;
+    padding: 20px;
+}
+
+.errors {
+    background-color: lightcoral;
+    color: darkred;
+    width: fit-content;
+    margin: 0 auto;
+    margin-top: 10px;
+    padding: 2px 20px;
+    border-radius: 5px;
+}
+
+.errors:empty {
+    display: none;
+}

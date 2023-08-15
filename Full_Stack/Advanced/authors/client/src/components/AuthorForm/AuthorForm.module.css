@@ -1,0 +1,10 @@
+.fieldspace {
+    margin-bottom: 20px;
+}
+
+.buttons {
+    margin: 0px auto;
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+}
