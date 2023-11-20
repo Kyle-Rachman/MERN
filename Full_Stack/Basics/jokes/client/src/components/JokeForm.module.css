@@ -1,0 +1,24 @@
+#container {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.jokeForm {
+    margin: 0 auto;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formGroup {
+    display: flex;
+    justify-content: space-between;
+}
+
+.formInput {
+    background: white;
+    color: black;
+    padding: 5px 10px;
+    border-radius: 5px;
+}

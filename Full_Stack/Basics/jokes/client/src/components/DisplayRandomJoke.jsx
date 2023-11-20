@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import styles from './DisplayRandomJoke.module.css'
 
 const DisplayRandomJoke = () => {
     const [ randSetup, setRandSetup ] = useState("Loading...");
@@ -26,11 +27,13 @@ const DisplayRandomJoke = () => {
     }, []);
 
     return (
-        <div>
-            <h1>Here's a random joke!</h1>
-            <h2>Setup: {randSetup}</h2>
-            <h2>Punchline: {randPunchline}</h2>
-            <form onSubmit={ handleSubmit }>
+        <div id={styles.container}>
+            <h1 style={{marginBottom: "-10px"}}>Here's a random joke!</h1>
+            <div className={styles.content}>
+                <h2 style={{marginBottom: "-10px"}}>Setup: {randSetup}</h2>
+                <h2>Punchline: {randPunchline}</h2>
+            </div>
+            <form onSubmit={ handleSubmit } className={styles.randomForm}>
                 <button type="submit">Refresh Random Joke</button>
             </form>
         </div>
